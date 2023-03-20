@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  sim:
+    build: episim
+    volumes:
+      - ${USERPROFILE}/.epiphron:/cfg
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/cfg/key.json
+  web:
+    build: epiweb
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${USERPROFILE}/.epiphron:/cfg
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/cfg/key.json

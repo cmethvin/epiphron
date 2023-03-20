@@ -1,0 +1,82 @@
+{{define "sim"}}
+<!DOCTYPE html>
+<html>
+{{template "head"}}
+<body>
+<div>
+    <p>ID: {{.ID}}</p>
+    <p>State: {{.State}}</p>
+    <p>Created Time: {{.CreateTime}}</p>
+    {{if .Done}}
+      <div id="graph"></div>
+      <script>
+          const data = [
+            {
+                x: [
+                  {{range $index, $element := .Results.MeanMidInterestSuccess}}
+                    {{if $index}},{{end}}
+                    {{$index}}
+                  {{end}}
+                ],
+                y: [
+                  {{range $index, $element := .Results.MeanMidInterestSuccess}}
+                    {{if $index}},{{end}}
+                    {{$element}}
+                  {{end}}
+                ],
+                type: 'bar'
+            }
+          ]
+
+          Plotly.newPlot('graph', data)
+      </script>
+    {{end}}
+    {{if .Done}}
+        <p>Completed Time: {{.DoneTime}}</p>
+{{/*        <table>*/}}
+{{/*            <thead>*/}}
+{{/*                <tr>*/}}
+{{/*                    <th>Success Years</th>*/}}
+{{/*                    <th>Final Savings</th>*/}}
+{{/*                    <th>Mean Low Interest</th>*/}}
+{{/*                    <th>Mean Mid Interest</th>*/}}
+{{/*                    <th>Mean High Interest</th>*/}}
+{{/*                    <th>Mean Low Interest - Fail</th>*/}}
+{{/*                    <th>Mean Mid Interest - Fail</th>*/}}
+{{/*                    <th>Mean High Interest - Fail</th>*/}}
+{{/*                    <th>Mean Low Interest - Success</th>*/}}
+{{/*                    <th>Mean Mid Interest - Success</th>*/}}
+{{/*                    <th>Mean High Interest - Success</th>*/}}
+{{/*                    <th>Years</th>*/}}
+{{/*                    <th>Percentiles</th>*/}}
+{{/*                </tr>*/}}
+{{/*            </thead>*/}}
+{{/*            <tbody>*/}}
+{{/*                {{range .Results}}*/}}
+{{/*                    <tr>*/}}
+{{/*                        <td>{{.SuccessYears}}</td>*/}}
+{{/*                        <td>{{.FinalSavings}}</td>*/}}
+{{/*                        <td>{{.MeanLowInterest}}</td>*/}}
+{{/*                        <td>{{.MeanMidInterest}}</td>*/}}
+{{/*                        <td>{{.MeanHighInterest}}</td>*/}}
+{{/*                        <td>{{.MeanLowInterestFail}}</td>*/}}
+{{/*                        <td>{{.MeanMidInterestFail}}</td>*/}}
+{{/*                        <td>{{.MeanHighInterestFail}}</td>*/}}
+{{/*                        <td>{{.MeanLowInterestSuccess}}</td>*/}}
+{{/*                        <td>{{.MeanMidInterestSuccess}}</td>*/}}
+{{/*                        <td>{{.MeanHighInterestSuccess}}</td>*/}}
+{{/*                        <td>{{.Years}}</td>*/}}
+{{/*                        <td>{{.Percentiles}}</td>*/}}
+{{/*                    </tr>*/}}
+{{/*                {{end}}*/}}
+{{/*            </tbody>*/}}
+{{/*        </table>*/}}
+    {{else}}
+        <script>
+          loadResults({{.ID}})
+        </script>
+    {{end}}
+</div>
+</body>
+</html>
+{{end}}

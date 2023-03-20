@@ -1,0 +1,6 @@
+google-cloud-pubsub
+google-cloud-datastore
+scipy
+numpy
+pertdist
+pandas

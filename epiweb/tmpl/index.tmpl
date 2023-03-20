@@ -1,0 +1,13 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html>
+{{template "head"}}
+<body>
+<form action="/sim" method="post" >
+    <label for="retire-period">Retirement Period</label>
+    <input type="text" name="retire-period" id="retire-period" />
+    <button type="submit">Start</button>
+</form>
+</body>
+</html>
+{{end}}
